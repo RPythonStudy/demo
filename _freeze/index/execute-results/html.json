@@ -1,0 +1,17 @@
+{
+  "hash": "7445a1b98e6e6a7bb7634218b515ff22",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: |\n  Survival of patients with colorectal liver metastases treated with and without preoperative chemotherapy: propensity score-matched study\nauthors:\n  - name: RPythonStudy\n    affiliation: KIRAMS\n    roles: writing\nbibliography: references.bib\n---\n\n\n### Introduction\n\n### Methods\n\n\n::: {.cell}\n\n```{.r .cell-code .hidden}\nsource(\"C:/R/Projects/R-4.4.1-RPythonStudy_Demo/source/my_functions.R\")\nlibrary(readxl)\nraw_data <- read_excel(\"C:/R/Projects/R-4.4.1-RPythonStudy_Demo/raw_data/deidentified_han20230213.xlsx\")\nTotal_number_of_patients <- nrow(raw_data)\n```\n:::\n\n\n### Results\n\nThe total number of patients was 156. The histogram for AGE is shown in Figure 1.\n\n\n::: {.cell}\n\n```{.r .cell-code .hidden}\nhist(raw_data$AGE,\n     main=\"Figure 1. Histogram for AGE\",)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/histogram_for_AGE-1.png){width=672}\n:::\n:::\n\n\n\n### Discussion\n\n### Conclusion\n\nThe title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 [@knuth84].\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

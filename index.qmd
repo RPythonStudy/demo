@@ -1,0 +1,38 @@
+---
+title: |
+  Survival of patients with colorectal liver metastases treated with and without preoperative chemotherapy: propensity score-matched study
+authors:
+  - name: RPythonStudy
+    affiliation: KIRAMS
+    roles: writing
+bibliography: references.bib
+---
+
+### Introduction
+
+### Methods
+
+```{r Total_number_of_patients, echo=FALSE}
+
+source("C:/R/Projects/R-4.4.1-RPythonStudy_Demo/source/my_functions.R")
+library(readxl)
+raw_data <- read_excel("C:/R/Projects/R-4.4.1-RPythonStudy_Demo/raw_data/deidentified_han20230213.xlsx")
+Total_number_of_patients <- nrow(raw_data)
+```
+
+### Results
+
+The total number of patients was `r Total_number_of_patients`. The histogram for AGE is shown in Figure 1.
+
+```{r histogram_for_AGE, echo=FALSE}
+
+hist(raw_data$AGE,
+     main="Figure 1. Histogram for AGE",)
+```
+
+
+### Discussion
+
+### Conclusion
+
+The title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 [@knuth84].
