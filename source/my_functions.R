@@ -1,4 +1,79 @@
 ################################################################################
+## 함수명: my_NA_variable_clean
+## 제작일: 2024-07-28
+## 인  자: 데이터프레임, NA_cut_off - NA 비율 기준
+## 반환값: NA 비율 기준에 따라 NA가 많은 열을 제거한 데이터프레임
+## 참  고: 제거되는 열의 이름과 NA 개수를 출력
+################################################################################
+my_NA_variable_clean <- function(data, NA_cut_off) {
+  # Calculate the threshold in terms of number of NAs
+  NA_threshold <- nrow(data) * (NA_cut_off / 100)
+  
+  # Initialize vectors to store column names and NA counts
+  columns_with_na <- c()
+  na_counts <- c()
+  
+  # Identify columns to retain and store information about columns with NAs
+  columns_to_retain <- sapply(names(data), function(column_name) {
+    na_count <- sum(is.na(data[[column_name]]))
+    if (na_count > 0) {
+      columns_with_na <<- c(columns_with_na, column_name)
+      na_counts <<- c(na_counts, na_count)
+    }
+    return(na_count <= NA_threshold)
+  })
+  
+  # Subset the data to retain only the desired columns
+  cleaned_data <- data[, columns_to_retain]
+  
+  # Print columns with NAs and their counts
+  if (length(columns_with_na) > 0) {
+    cat("Columns with NAs:\n")
+    for (i in seq_along(columns_with_na)) {
+      cat(columns_with_na[i], ": ", na_counts[i], " NAs\n", sep="")
+    }
+  } else {
+    cat("No columns with NAs found.\n")
+  }
+  
+  return(cleaned_data)
+}
+
+
+################################################################################
+## 함수명: my_NA_row_clean 
+## 제작일: 2024-07-17
+## 인  자: 데이터프레임
+## 반환값: NA가 포함된 열을 제거한 데이터프레임
+################################################################################
+my_NA_row_clean <- function(data) {
+  # Identify columns with NAs and count the number of NAs in each column
+  na_info <- sapply(data, function(column) {
+    sum(is.na(column))
+  })
+  
+  # Get column names with NAs
+  columns_with_na <- names(na_info)[na_info > 0]
+  
+  # Print column names and number of NAs
+  if (length(columns_with_na) > 0) {
+    cat("Columns with NAs:\n")
+    for (column in columns_with_na) {
+      cat(column, ": ", na_info[column], " NAs\n", sep = "")
+    }
+  } else {
+    cat("No columns with NAs found.\n")
+  }
+  
+  # Remove rows with NAs
+  cleaned_data <- na.omit(data)
+  
+  return(cleaned_data)
+}
+
+
+
+################################################################################
 ## my_functions_for_load_raw_data
 ################################################################################
 my_read_csv_from_raw_data_folder <- function(csv_filename) {
@@ -33,12 +108,16 @@ my_deidentify_raw_data <- function(df, col_name) {
 
 
 ################################################################################
-## my_functions_for_graph
+## 함수명: my_histgram_with_outliers 
+## 제작일: 2024-07-17
+## 인  자: 데이터프레임과 컬럼명
+## 반환값: outlier를 표시한 히스토그램
 ################################################################################
 my_histgram_with_outliers <- function(df, column_name) {
   
   library(ggplot2)
   # 데이터 준비
+  
   data <- df[[column_name]]
   
   # 평균과 표준편차 계산
@@ -68,16 +147,18 @@ my_histgram_with_outliers <- function(df, column_name) {
     theme_minimal()
   
   # 이상치 값 출력
-  outliers <- df[data < lower_bound | data > upper_bound, column_name]
-  cat("Outliers (values that are more than 3 standard deviations from the mean):\n")
-  print(outliers)
+  # outliers <- df[data < lower_bound | data > upper_bound, column_name]
+  # cat("Outliers (values that are more than 3 standard deviations from the mean):\n")
+  # print(outliers)
   
-  print(p)
+  return (p)
 }
 
 
 my_histogram_log_transformation_with_outliers <- function(df, column_name) {
-  # 원본 데이터 저장
+
+  library(ggplot2)
+    # 원본 데이터 저장
   original_data <- df[[column_name]]
   
   # NA 값을 포함한 행을 삭제
@@ -118,8 +199,8 @@ my_histogram_log_transformation_with_outliers <- function(df, column_name) {
   # 이상치 값 출력 (로그 변환 이전 값으로 변환)
   outlier_indices <- which(data < lower_bound | data > upper_bound)
   outliers <- original_data[outlier_indices]
-  cat("Outliers (values that are more than 3 standard deviations from the mean):\n")
-  print(outliers)
+  # cat("Outliers (values that are more than 3 standard deviations from the mean):\n")
+  # print(outliers)
   
   print(p)
 }

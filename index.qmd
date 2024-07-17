@@ -12,27 +12,29 @@ bibliography: references.bib
 
 ### Methods
 
-```{r Total_number_of_patients, echo=FALSE}
+```{r Total_number_of_patients, include=FALSE}
 
 source("C:/R/Projects/R-4.4.1-RPythonStudy_Demo/source/my_functions.R")
 library(readxl)
-raw_data <- read_excel("C:/R/Projects/R-4.4.1-RPythonStudy_Demo/raw_data/deidentified_han20230213.xlsx")
-Total_number_of_patients <- nrow(raw_data)
+HAN_raw <- read_excel("C:/R/Projects/R-4.4.1-RPythonStudy_Demo/raw_data/deidentified_han20230213.xlsx")
+Total_number_of_patients <- nrow(HAN_raw)
+HAN_NA_variable_cleaned<-my_NA_variable_clean(HAN_raw, 5)
+HAN_NA_clearned<-my_NA_row_clean(HAN_NA_variable_cleaned)
+
+
 ```
 
 ### Results
 
-The total number of patients was `r Total_number_of_patients`. The histogram for AGE is shown in Figure 1.
+The total number of patients was `r Total_number_of_patients`. The log transformed histogram for preHR_CA19-9 is shown in Figure 1.
 
-```{r histogram_for_AGE, echo=FALSE}
+```{r histogram_for_preHR_CA199, warning=FALSE}
 
-hist(raw_data$AGE,
-     main="Figure 1. Histogram for AGE",)
+my_histogram_log_transformation_with_outliers (HAN_NA_clearned, "preHR_CA199")
 ```
-
 
 ### Discussion
 
 ### Conclusion
 
-The title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 [@knuth84].
+The title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 [@RN670].

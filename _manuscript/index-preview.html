@@ -53,7 +53,27 @@
       @media screen {
       pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
       }
-    </style>
+      /* CSS for citations */
+      div.csl-bib-body { }
+      div.csl-entry {
+        clear: both;
+        margin-bottom: 0em;
+      }
+      .hanging-indent div.csl-entry {
+        margin-left:2em;
+        text-indent:-2em;
+      }
+      div.csl-left-margin {
+        min-width:2em;
+        float:left;
+      }
+      div.csl-right-inline {
+        margin-left:2em;
+        padding-left:1em;
+      }
+      div.csl-indent {
+        margin-left: 2em;
+      }    </style>
 
     <style>
       body.hypothesis-enabled #quarto-embed-header {
@@ -245,20 +265,41 @@
 <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"C:/R/Projects/R-4.4.1-RPythonStudy_Demo/source/my_functions.R"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"C:/R/Projects/R-4.4.1-RPythonStudy_Demo/raw_data/deidentified_han20230213.xlsx"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Total_number_of_patients <span class="ot">&lt;-</span> <span class="fu">nrow</span>(raw_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>HAN_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"C:/R/Projects/R-4.4.1-RPythonStudy_Demo/raw_data/deidentified_han20230213.xlsx"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Total_number_of_patients <span class="ot">&lt;-</span> <span class="fu">nrow</span>(HAN_raw)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>HAN_NA_variable_cleaned<span class="ot">&lt;-</span><span class="fu">my_NA_variable_clean</span>(HAN_raw, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Columns with NAs:
+과거.암병력: 142 NAs
+Comobidity..MI.CHF.PVD.CVA.dementia.COPD.CD.PU.LD.DM.hemipl.CKD..: 78 NAs
+preHR_CA199: 4 NAs
+COMMENT: 150 NAs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>HAN_NA_clearned<span class="ot">&lt;-</span><span class="fu">my_NA_row_clean</span>(HAN_NA_variable_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Columns with NAs:
+preHR_CA199: 4 NAs</code></pre>
+</div>
 </div></div>
 </section>
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">Results</h3>
-<p>The total number of patients was 156. The histogram for AGE is shown in Figure 1.</p>
+<p>The total number of patients was 156. The log transformed histogram for preHR_CA19-9 is shown in Figure 1.</p>
 <div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(raw_data<span class="sc">$</span>AGE,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Figure 1. Histogram for AGE"</span>,)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_histogram_log_transformation_with_outliers</span> (HAN_NA_clearned, <span class="st">"preHR_CA199"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`.
+ℹ See also `vignette("ggplot2-in-packages")` for more information.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
 <div class="cell-output-display">
 <div class="">
 <figure class="figure">
-<p class=""><a href="index_files/figure-html/histogram_for_AGE-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/histogram_for_AGE-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p class=""><a href="index_files/figure-html/histogram_for_preHR_CA199-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/histogram_for_preHR_CA199-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -269,7 +310,12 @@
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>The title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 <span class="citation" data-cites="knuth84">(<a href="#ref-knuth84" role="doc-biblioref"><strong>knuth84?</strong></a>)</span>.</p>
+<p>The title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 <span class="citation" data-cites="RN670">(<a href="#ref-RN670" role="doc-biblioref">Graaff et al. 2023</a>)</span>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-RN670" class="csl-entry" role="listitem">
+Graaff, M. R. de, J. M. Klaase, R. M. van Dam, K. F. D. Kuhlmann, G. Kazemier, R. J. Swijnenburg, A. K. E. Elfrink, et al. 2023. <span>“Survival of Patients with Colorectal Liver Metastases Treated with and Without Preoperative Chemotherapy: Nationwide Propensity Score-Matched Study.”</span> Journal Article. <em>Eur J Surg Oncol</em> 49 (9): 106932. <a href="https://doi.org/10.1016/j.ejso.2023.05.007">https://doi.org/10.1016/j.ejso.2023.05.007</a>.
+</div>
+</div>
 </section>
      </main>
 <!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
@@ -680,7 +726,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

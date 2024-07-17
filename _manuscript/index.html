@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -122,12 +142,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">Results</h3>
-<p>The total number of patients was 156. The histogram for AGE is shown in Figure 1.</p>
+<p>The total number of patients was 156. The log transformed histogram for preHR_CA19-9 is shown in Figure 1.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/histogram_for_AGE-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/histogram_for_AGE-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/histogram_for_preHR_CA199-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/histogram_for_preHR_CA199-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -138,10 +158,15 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>The title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 <span class="citation" data-cites="knuth84">(<a href="#ref-knuth84" role="doc-biblioref"><strong>knuth84?</strong></a>)</span>.</p>
+<p>The title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 <span class="citation" data-cites="RN670">(<a href="#ref-RN670" role="doc-biblioref">Graaff et al. 2023</a>)</span>.</p>
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-RN670" class="csl-entry" role="listitem">
+Graaff, M. R. de, J. M. Klaase, R. M. van Dam, K. F. D. Kuhlmann, G. Kazemier, R. J. Swijnenburg, A. K. E. Elfrink, et al. 2023. <span>“Survival of Patients with Colorectal Liver Metastases Treated with and Without Preoperative Chemotherapy: Nationwide Propensity Score-Matched Study.”</span> Journal Article. <em>Eur J Surg Oncol</em> 49 (9): 106932. <a href="https://doi.org/10.1016/j.ejso.2023.05.007">https://doi.org/10.1016/j.ejso.2023.05.007</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -553,7 +578,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

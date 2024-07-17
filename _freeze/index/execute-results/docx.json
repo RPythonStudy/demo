@@ -1,0 +1,17 @@
+{
+  "hash": "47e3567fe595c57b10baca7c9d8128db",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: |\n  Survival of patients with colorectal liver metastases treated with and without preoperative chemotherapy: propensity score-matched study\nauthors:\n  - name: RPythonStudy\n    affiliation: KIRAMS\n    roles: writing\nbibliography: references.bib\n---\n\n\n\n### Introduction\n\n### Methods\n\n\n\n::: {.cell}\n\n```{.r .cell-code .hidden}\nsource(\"C:/R/Projects/R-4.4.1-RPythonStudy_Demo/source/my_functions.R\")\nlibrary(readxl)\nHAN_raw <- read_excel(\"C:/R/Projects/R-4.4.1-RPythonStudy_Demo/raw_data/deidentified_han20230213.xlsx\")\nTotal_number_of_patients <- nrow(HAN_raw)\nHAN_NA_variable_cleaned<-my_NA_variable_clean(HAN_raw, 5)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nColumns with NAs:\n과거.암병력: 142 NAs\nComobidity..MI.CHF.PVD.CVA.dementia.COPD.CD.PU.LD.DM.hemipl.CKD..: 78 NAs\npreHR_CA199: 4 NAs\nCOMMENT: 150 NAs\n```\n\n\n:::\n\n```{.r .cell-code .hidden}\nHAN_NA_clearned<-my_NA_row_clean(HAN_NA_variable_cleaned)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nColumns with NAs:\npreHR_CA199: 4 NAs\n```\n\n\n:::\n:::\n\n\n\n### Results\n\nThe total number of patients was 156. The log tranformed histogram for preHR_CA19-9 is shown in Figure 1.\n\n\n\n::: {.cell}\n\n```{.r .cell-code .hidden}\nmy_histogram_log_transformation_with_outliers (HAN_NA_clearned, \"preHR_CA199\")\n```\n\n::: {.cell-output .cell-output-stderr .hidden}\n\n```\nWarning: `aes_string()` was deprecated in ggplot2 3.0.0.\nℹ Please use tidy evaluation idioms with `aes()`.\nℹ See also `vignette(\"ggplot2-in-packages\")` for more information.\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr .hidden}\n\n```\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](index_files/figure-docx/histogram_for_preHR_CA199-1.png)\n:::\n:::\n\n\n\n### Discussion\n\n### Conclusion\n\nThe title of this demo manuscript was inspired by the paper of de Graaff MR in in 2023 [@RN670; @knuth84].\n",
+    "supporting": [
+      "index_files\\figure-docx"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}
